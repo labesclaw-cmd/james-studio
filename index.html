@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>James Chen｜Web & App Studio</title>
+  <style>
+    :root {
+      --gold:   #c9a84c;
+      --gold2:  #e8c97a;
+      --gold3:  #9a7a28;
+      --bg:     #fafaf8;
+      --bg2:    #f4f2ee;
+      --bg3:    #eeebe4;
+      --text:   #111111;
+      --text2:  #3a3a3a;
+      --muted:  #888888;
+      --border: #e0ddd6;
+      --r:      10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', 'PingFang TC', Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+    }
+    .nav-logo {
+      font-size: 1rem; font-weight: 900; letter-spacing: 5px;
+      padding: 20px 0; color: var(--text);
+    }
+    .nav-logo em { font-style: normal; color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .78rem; letter-spacing: 2px; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 120px 6% 80px;
+      position: relative; overflow: hidden;
+      max-width: 1200px; margin: 0 auto;
+    }
+    /* subtle bg accent */
+    #hero::before {
+      content: '';
+      position: fixed; top: 0; right: 0;
+      width: 55vw; height: 100vh;
+      background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+      z-index: -1;
+    }
+    #hero::after {
+      content: '';
+      position: fixed; top: 0; right: 0;
+      width: 55vw; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold2), var(--gold));
+      z-index: -1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--gold); font-size: .7rem; letter-spacing: 5px; text-transform: uppercase;
+      margin-bottom: 28px; font-weight: 600;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+    #hero h1 {
+      font-size: clamp(3rem, 6.5vw, 6rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -2px;
+      margin-bottom: 28px;
+    }
+    .h1-light { display: block; color: var(--muted); font-weight: 300; letter-spacing: -1px; }
+    .h1-dark  { display: block; color: var(--text); }
+    .h1-gold  {
+      display: inline-block;
+      color: var(--gold);
+      position: relative;
+    }
+    .h1-gold::after {
+      content: '';
+      position: absolute; bottom: 2px; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold2), var(--gold3));
+      border-radius: 2px;
+    }
+    #hero p { font-size: 1.05rem; color: var(--text2); max-width: 460px; margin-bottom: 48px; line-height: 1.85; }
+    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-dark {
+      background: var(--text); color: var(--bg);
+      font-weight: 700; padding: 15px 36px;
+      border-radius: var(--r); text-decoration: none; font-size: .88rem; letter-spacing: 1px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-dark:hover {
+      background: #2a2a2a; transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+    }
+    .btn-gold-outline {
+      border: 1.5px solid var(--gold); color: var(--gold3);
+      padding: 14px 34px; border-radius: var(--r);
+      text-decoration: none; font-size: .88rem; letter-spacing: 1px; font-weight: 600;
+      background: transparent;
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .btn-gold-outline:hover {
+      background: rgba(201,168,76,0.07);
+      border-color: var(--gold3); transform: translateY(-2px);
+    }
+    /* stats row */
+    .hero-stats {
+      position: absolute; bottom: 80px; right: 6%;
+      display: flex; gap: 48px;
+    }
+    .stat-item { text-align: right; }
+    .stat-num {
+      font-size: 2rem; font-weight: 900; letter-spacing: -1px; color: var(--text);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--gold); }
+    .stat-label { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION ── */
+    .sec-wrap { padding: 100px 6%; }
+    .sec-inner { max-width: 1100px; margin: 0 auto; }
+    .sec-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--gold); font-size: .68rem; letter-spacing: 5px; text-transform: uppercase;
+      margin-bottom: 16px; font-weight: 600;
+    }
+    .sec-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+    h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; margin-bottom: 14px; letter-spacing: -1px; }
+    h2 em { font-style: normal; color: var(--gold); }
+    .sec-sub { color: var(--muted); max-width: 500px; margin-bottom: 56px; font-size: .95rem; }
+    .divider { width: 40px; height: 2px; background: linear-gradient(90deg, var(--gold2), var(--gold3)); border-radius: 2px; margin-bottom: 40px; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); border-top: 1px solid var(--border); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .service-card {
+      padding: 40px 32px; background: var(--bg);
+      position: relative; overflow: hidden;
+      transition: background .25s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold2), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s;
+    }
+    .service-card:hover { background: var(--bg2); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .svc-num {
+      font-size: 3rem; font-weight: 900; color: var(--border);
+      line-height: 1; margin-bottom: 16px; letter-spacing: -2px;
+      transition: color .25s;
+    }
+    .service-card:hover .svc-num { color: rgba(201,168,76,0.2); }
+    .svc-icon { font-size: 1.6rem; margin-bottom: 14px; }
+    .service-card h3 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
+    .service-card p { color: var(--muted); font-size: .9rem; line-height: 1.65; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+    .tag {
+      font-size: .7rem; padding: 4px 12px; border-radius: 20px;
+      background: var(--bg3); color: var(--text2);
+      letter-spacing: .3px; border: 1px solid var(--border);
+    }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+    .port-card {
+      border-radius: 14px; overflow: hidden;
+      background: var(--bg); text-decoration: none; color: inherit; display: block;
+      border: 1px solid var(--border);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .port-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(0,0,0,.1);
+      border-color: var(--gold2);
+    }
+    .port-thumb {
+      height: 200px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .port-thumb-sin7 {
+      background: linear-gradient(135deg, #1a0533 0%, #3a0ca3 50%, #4cc9f0 100%);
+    }
+    .port-thumb-placeholder {
+      background: var(--bg3);
+    }
+    .port-thumb-inner { font-size: 4rem; position: relative; z-index: 1; }
+    .port-thumb::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(250,250,248,0.5) 100%);
+    }
+    .port-info { padding: 24px 26px 28px; }
+    .port-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .port-info p { color: var(--muted); font-size: .87rem; line-height: 1.6; }
+    .port-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--gold3); font-size: .82rem; margin-top: 14px;
+      letter-spacing: .5px; font-weight: 600;
+      text-decoration: none;
+    }
+    .port-placeholder { cursor: default; opacity: .6; }
+
+    /* ── STYLE PREVIEW ── */
+    #style-preview { background: var(--bg); border-top: 1px solid var(--border); }
+    .style-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .style-card {
+      border-radius: 14px; overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border); background: var(--bg);
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+    .style-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold2);
+      box-shadow: 0 12px 36px rgba(0,0,0,.1);
+    }
+    .style-thumb { height: 170px; overflow: hidden; position: relative; }
+    /* dark gold thumbnail */
+    .stt-dark {
+      background: #0d0d14;
+      display: flex; flex-direction: column; justify-content: center; padding: 22px;
+    }
+    /* minimal white thumbnail (this site) */
+    .stt-minimal {
+      background: #fafaf8;
+      display: flex; flex-direction: column; justify-content: center; padding: 22px;
+      border-bottom: 1px solid #e0ddd6;
+    }
+    /* vibrant gradient thumbnail */
+    .stt-vibrant {
+      background: #0d0621;
+      position: relative;
+      display: flex; flex-direction: column; justify-content: center; padding: 22px;
+      overflow: hidden;
+    }
+    .stt-vibrant::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 20%, rgba(247,37,133,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 85% 20%, rgba(114,9,183,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 80% 90%, rgba(76,201,240,0.4) 0%, transparent 55%);
+    }
+    .stt-vibrant > * { position: relative; z-index: 1; }
+
+    .style-label { padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .style-label-text span { display: block; font-size: .92rem; font-weight: 700; margin-bottom: 3px; color: var(--text); }
+    .style-label-text small { color: var(--muted); font-size: .75rem; }
+    .preview-btn {
+      background: var(--text); color: var(--bg);
+      border: none; padding: 8px 18px;
+      border-radius: 6px; font-size: .75rem; font-weight: 700;
+      cursor: pointer; letter-spacing: 1px;
+      transition: background .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .preview-btn:hover { background: #2a2a2a; transform: scale(1.03); }
+    /* "當前" badge */
+    .badge-current {
+      display: inline-block; font-size: .65rem; padding: 2px 8px; border-radius: 20px;
+      background: rgba(201,168,76,0.15); color: var(--gold3);
+      border: 1px solid rgba(201,168,76,0.3); letter-spacing: 1px;
+      margin-left: 8px; vertical-align: middle;
+    }
+
+    /* ── MODAL ── */
+    #preview-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    #preview-modal.open { display: flex; }
+    .modal-box {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 14px; width: 100%; max-width: 900px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.25);
+    }
+    .modal-hd {
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .modal-hd-title { color: var(--gold3); font-weight: 700; font-size: .9rem; letter-spacing: 1px; }
+    .modal-close {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); font-size: 1rem; cursor: pointer;
+      width: 32px; height: 32px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, color .2s;
+    }
+    .modal-close:hover { border-color: var(--gold); color: var(--gold); }
+    .modal-body { height: 520px; }
+    .modal-body iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .contact-card {
+      padding: 28px 26px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 12px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .contact-card:hover { border-color: var(--gold2); box-shadow: 0 6px 24px rgba(0,0,0,.07); }
+    .contact-ico { font-size: 1.7rem; flex-shrink: 0; }
+    .contact-card h4 {
+      color: var(--gold3); font-size: .68rem; letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 8px; font-weight: 600;
+    }
+    .contact-card p { font-size: .97rem; color: var(--text2); }
+    .contact-card a { color: var(--text); text-decoration: none; transition: color .2s; }
+    .contact-card a:hover { color: var(--gold); }
+
+    /* ── CTA ── */
+    #cta {
+      text-align: center; padding: 120px 6%;
+      background: var(--text); color: var(--bg);
+      position: relative; overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,168,76,0.08), transparent 70%);
+    }
+    #cta h2 { position: relative; color: var(--bg); margin-bottom: 14px; }
+    #cta p { position: relative; color: rgba(250,250,248,0.55); margin-bottom: 42px; font-size: 1.05rem; }
+    .btn-cta {
+      background: linear-gradient(135deg, var(--gold2), var(--gold), var(--gold3));
+      color: #111; font-weight: 800; padding: 16px 42px;
+      border-radius: var(--r); text-decoration: none; font-size: .92rem; letter-spacing: 1px;
+      box-shadow: 0 0 32px rgba(201,168,76,0.35);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 48px rgba(201,168,76,0.50); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align: center; padding: 26px 6%;
+      background: var(--text); color: rgba(250,250,248,0.35);
+      font-size: .8rem; letter-spacing: .5px;
+    }
+    footer em { font-style: normal; color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .hero-stats { display: none; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .sec-wrap { padding: 70px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JAMES <em>CHEN</em></div>
+  <ul class="nav-links">
+    <li><a href="#services">服務</a></li>
+    <li><a href="#portfolio">作品</a></li>
+    <li><a href="#style-preview">風格預覽</a></li>
+    <li><a href="#contact">聯絡</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Web · App · System</div>
+  <h1>
+    <span class="h1-light">把你的想法</span>
+    <span class="h1-dark">變成<span class="h1-gold">產品</span></span>
+  </h1>
+  <p>專業網頁開發、App 製作、應用程式開發。<br>從需求到上線，全程一手包辦。</p>
+  <div class="btn-group">
+    <a href="#contact" class="btn-dark">立即諮詢</a>
+    <a href="#portfolio" class="btn-gold-outline">查看作品</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">6<span>+</span></div>
+      <div class="stat-label">完成案件</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>+</span></div>
+      <div class="stat-label">服務項目</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div id="services" class="sec-wrap">
+  <div class="sec-inner">
+    <span class="sec-tag">Services</span>
+    <h2>我能為你<em>做什麼</em></h2>
+    <div class="divider"></div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🌐</div>
+        <h3>網頁開發</h3>
+        <p>企業官網、活動頁、電商平台、訂閱服務頁。從設計到部署，完整交付。</p>
+        <div class="tags">
+          <span class="tag">HTML / CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">響應式設計</span>
+          <span class="tag">SEO 優化</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">📱</div>
+        <h3>App 開發</h3>
+        <p>iOS / Android 跨平台 App。Flutter 技術，一套程式碼，雙平台上架。</p>
+        <div class="tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">iOS</span>
+          <span class="tag">Android</span>
+          <span class="tag">UI/UX</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">⚙️</div>
+        <h3>應用程式開發</h3>
+        <p>自動化工具、後台管理系統、資料處理流程。讓繁瑣的工作交給程式。</p>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Google Apps Script</span>
+          <span class="tag">自動化</span>
+          <span class="tag">API 串接</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio" class="sec-wrap">
+  <div class="sec-inner">
+    <span class="sec-tag">Portfolio</span>
+    <h2>過去<em>作品</em></h2>
+    <div class="divider"></div>
+    <div class="portfolio-grid">
+
+      <a class="port-card" href="https://sin7lineage.github.io" target="_blank" rel="noopener">
+        <div class="port-thumb port-thumb-sin7">
+          <div class="port-thumb-inner">⚔️</div>
+        </div>
+        <div class="port-info">
+          <h3>七原罪天堂私服官網</h3>
+          <p>天堂私服遊戲官方網站，含職業介紹、BOSS資料庫、技能/裝備查詢、下載區等完整功能頁面。</p>
+          <div class="port-link">查看網站 →</div>
+        </div>
+      </a>
+
+      <div class="port-card port-placeholder">
+        <div class="port-thumb port-thumb-placeholder">
+          <div style="font-size:2.5rem;color:var(--border)">＋</div>
+        </div>
+        <div class="port-info">
+          <h3>你的專案</h3>
+          <p>下一個作品可以是你的。告訴我你的想法，我們一起把它做出來。</p>
+          <div class="port-link" style="color:var(--muted)">洽詢中</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- STYLE PREVIEW -->
+<div id="style-preview" class="sec-wrap">
+  <div class="sec-inner">
+    <span class="sec-tag">Style Preview</span>
+    <h2>網站<em>風格選擇</em></h2>
+    <div class="divider"></div>
+    <p class="sec-sub">不確定要什麼風格？以下是三種設計方向，點擊即可看到完整示範頁面。</p>
+    <div class="style-grid">
+
+      <!-- 1. Minimal White (current) -->
+      <div class="style-card">
+        <div class="style-thumb stt-minimal">
+          <div style="color:#c9a84c;font-size:.62rem;letter-spacing:4px;margin-bottom:10px;font-weight:600">MINIMAL WHITE</div>
+          <div style="color:#111;font-size:1.25rem;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px">乾淨設計事務所</div>
+          <div style="color:#888;font-size:.78rem;margin-bottom:12px">白底 · 金色點綴 · 高端質感</div>
+          <div style="display:flex;gap:6px">
+            <span style="width:14px;height:14px;border-radius:50%;background:#c9a84c;box-shadow:0 0 6px rgba(201,168,76,.4)"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#111"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#fafaf8;border:1px solid #e0ddd6"></span>
+          </div>
+        </div>
+        <div class="style-label">
+          <div class="style-label-text">
+            <span>淡白＋金<span class="badge-current">當前</span></span>
+            <small>設計事務所 · 高端形象</small>
+          </div>
+          <button class="preview-btn" onclick="openPreview('minimal')">預覽</button>
+        </div>
+      </div>
+
+      <!-- 2. Dark Gold -->
+      <div class="style-card">
+        <div class="style-thumb stt-dark">
+          <div style="color:rgba(201,168,76,.7);font-size:.62rem;letter-spacing:4px;margin-bottom:10px;font-weight:600">DARK GOLD</div>
+          <div style="color:#fff;font-size:1.25rem;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px">深色金屬質感</div>
+          <div style="color:#666;font-size:.78rem;margin-bottom:12px">深底 · 科技感 · 高端專業</div>
+          <div style="display:flex;gap:6px">
+            <span style="width:14px;height:14px;border-radius:50%;background:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,.6)"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#1a1a2a"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#fff"></span>
+          </div>
+        </div>
+        <div class="style-label">
+          <div class="style-label-text">
+            <span>深色＋金</span>
+            <small>科技感 · 遊戲/科技行業</small>
+          </div>
+          <button class="preview-btn" onclick="openPreview('dark')">預覽</button>
+        </div>
+      </div>
+
+      <!-- 3. Vibrant Gradient -->
+      <div class="style-card">
+        <div class="style-thumb stt-vibrant">
+          <div style="color:rgba(76,201,240,.9);font-size:.62rem;letter-spacing:4px;margin-bottom:10px;font-weight:600">VIBRANT GRADIENT</div>
+          <div style="color:#fff;font-size:1.25rem;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px">全彩漸層</div>
+          <div style="color:rgba(255,255,255,.55);font-size:.78rem;margin-bottom:12px">粉紅→紫→藍 · 現代活力</div>
+          <div style="display:flex;gap:6px">
+            <span style="width:14px;height:14px;border-radius:50%;background:#f72585;box-shadow:0 0 8px rgba(247,37,133,.7)"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#7209b7;box-shadow:0 0 8px rgba(114,9,183,.7)"></span>
+            <span style="width:14px;height:14px;border-radius:50%;background:#4cc9f0;box-shadow:0 0 8px rgba(76,201,240,.7)"></span>
+          </div>
+        </div>
+        <div class="style-label">
+          <div class="style-label-text">
+            <span>全彩漸層</span>
+            <small>年輕感 · 品牌識別強</small>
+          </div>
+          <button class="preview-btn" onclick="openPreview('vibrant')">預覽</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="sec-wrap">
+  <div class="sec-inner">
+    <span class="sec-tag">Contact</span>
+    <h2>開始你的<em>專案</em></h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-ico">💬</div>
+        <div>
+          <h4>LINE</h4>
+          <p><span style="color:var(--muted)">請填入 LINE ID</span></p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">📧</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:labesclaw@gmail.com">labesclaw@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ico">⏱</div>
+        <div>
+          <h4>回覆時間</h4>
+          <p>通常在 24 小時內回覆</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="cta">
+  <h2>準備好了嗎？</h2>
+  <p>告訴我你的想法，我們一起把它做出來。</p>
+  <a href="#contact" class="btn-cta">立即諮詢</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 <em>James Chen</em> · Web & App Studio · All rights reserved.
+</footer>
+
+<!-- MODAL -->
+<div id="preview-modal">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <span class="modal-hd-title" id="modal-title">風格預覽</span>
+      <button class="modal-close" onclick="closePreview()">✕</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="preview-iframe" src="about:blank"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+var STYLES = {
+  minimal: {
+    title: '◇ 淡白＋金 — 設計事務所風格',
+    html: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#fafaf8;color:#111;font-family:'Segoe UI',Arial,sans-serif}
+nav{background:rgba(250,250,248,.95);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0ddd6}
+.logo{font-weight:900;letter-spacing:4px;font-size:1rem;color:#111}.logo em{font-style:normal;color:#c9a84c}
+.hero{padding:80px 5% 60px;max-width:700px;position:relative}
+h1{font-size:3rem;font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-2px}
+.hl{color:#999;font-weight:300}.hd{color:#111}.hg{color:#c9a84c}
+p{color:#666;max-width:460px;margin-bottom:36px;line-height:1.8;font-size:.97rem}
+.btn{background:#111;color:#fafaf8;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block;margin-right:12px;font-size:.88rem}
+.btn2{border:1.5px solid #c9a84c;color:#9a7a28;padding:13px 30px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:.88rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e0ddd6;border:1px solid #e0ddd6;border-radius:12px;overflow:hidden;max-width:900px;margin:56px 5% 0}
+.card{background:#fafaf8;padding:32px 26px;transition:background .2s}
+.card:hover{background:#f4f2ee}
+.num{font-size:2.5rem;font-weight:900;color:#e0ddd6;line-height:1;margin-bottom:12px}
+.icon{font-size:1.5rem;margin-bottom:12px}
+.card h3{font-size:.97rem;font-weight:700;margin-bottom:8px}
+.card p{color:#888;font-size:.84rem}
+</style></head><body>
+<nav><div class="logo">JAMES <em>CHEN</em></div><span style="color:#aaa;font-size:.78rem;letter-spacing:2px">WEB · APP · SYSTEM</span></nav>
+<div class="hero">
+<h1><span class="hl">把你的想法</span><br><span class="hd">變成<span class="hg">產品</span></span></h1>
+<p>專業網頁開發、App 製作、應用程式開發。從需求到上線，全程一手包辦。</p>
+<a href="#" class="btn">立即諮詢</a><a href="#" class="btn2">查看作品</a>
+</div>
+<div class="grid">
+<div class="card"><div class="num">01</div><div class="icon">🌐</div><h3>網頁開發</h3><p>企業官網、電商平台、響應式設計</p></div>
+<div class="card"><div class="num">02</div><div class="icon">📱</div><h3>App 開發</h3><p>Flutter 跨平台，iOS / Android</p></div>
+<div class="card"><div class="num">03</div><div class="icon">⚙️</div><h3>應用程式</h3><p>自動化工具、後台系統、API 串接</p></div>
+</div></body></html>`
+  },
+  dark: {
+    title: '◆ 深色金色風格',
+    html: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0d0d14;color:#f0f0f0;font-family:Arial,sans-serif}
+nav{background:rgba(13,13,20,.95);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,.18)}
+.logo{background:linear-gradient(90deg,#f0d080,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:3px}
+.hero{min-height:45vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 5%;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.07) 0%,transparent 65%)}
+h1{font-size:2.8rem;margin-bottom:16px;line-height:1.1}
+.w{color:#fff}.g{background:linear-gradient(90deg,#f0d080,#c9a84c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+p{color:#7a7a90;max-width:440px;margin:0 auto 32px}
+.btn{background:linear-gradient(135deg,#f0d080,#c9a84c);color:#080810;padding:13px 30px;border-radius:8px;text-decoration:none;font-weight:800;display:inline-block;box-shadow:0 0 24px rgba(201,168,76,.3)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:40px 5%;max-width:860px;margin:0 auto}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:22px}
+.icon{font-size:1.6rem;margin-bottom:10px}
+.card h3{font-size:.95rem;margin-bottom:6px;color:#c9a84c}
+.card p{color:#7a7a90;font-size:.82rem}
+</style></head><body>
+<nav><div class="logo">JAMES CHEN</div><span style="color:#555;font-size:.8rem">Web · App · System</span></nav>
+<div class="hero"><h1><span class="w">把你的想法</span><br><span class="g">變成產品</span></h1><p>專業網頁 / App / 應用程式開發，從需求到上線一手包辦</p><a href="#" class="btn">立即諮詢</a></div>
+<div class="grid">
+<div class="card"><div class="icon">🌐</div><h3>網頁開發</h3><p>企業官網、電商平台、響應式設計</p></div>
+<div class="card"><div class="icon">📱</div><h3>App 開發</h3><p>Flutter 跨平台，iOS / Android</p></div>
+<div class="card"><div class="icon">⚙️</div><h3>應用程式</h3><p>自動化工具、後台系統、API 串接</p></div>
+</div></body></html>`
+  },
+  vibrant: {
+    title: '◈ 全彩漸層風格',
+    html: `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{background:#0d0621;color:#f0f0f0;font-family:Arial,sans-serif;position:relative;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 15% 15%,rgba(247,37,133,.3) 0%,transparent 55%),radial-gradient(ellipse 70% 70% at 85% 20%,rgba(114,9,183,.35) 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 80% 85%,rgba(76,201,240,.25) 0%,transparent 55%);pointer-events:none;z-index:0}
+nav{position:relative;z-index:1;background:rgba(13,6,33,.7);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.12);backdrop-filter:blur(20px)}
+.logo{background:linear-gradient(90deg,#4cc9f0,#f72585);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:3px}
+.hero{position:relative;z-index:1;min-height:45vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 5%}
+h1{font-size:2.8rem;background:linear-gradient(100deg,#fff 20%,#f72585 55%,#4cc9f0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px;line-height:1.1}
+p{color:rgba(255,255,255,.6);max-width:440px;margin:0 auto 32px}
+.btn{background:linear-gradient(135deg,#f72585,#7209b7);color:#fff;padding:13px 30px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block;box-shadow:0 0 28px rgba(247,37,133,.4)}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:40px 5%;max-width:860px;margin:0 auto}
+.card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:22px;backdrop-filter:blur(10px)}
+.icon{font-size:1.6rem;margin-bottom:10px}
+.card h3{font-size:.95rem;margin-bottom:6px;background:linear-gradient(90deg,#f72585,#4cc9f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card p{color:rgba(255,255,255,.5);font-size:.82rem}
+</style></head><body>
+<nav><div class="logo">JAMES CHEN</div><span style="color:rgba(255,255,255,.3);font-size:.8rem">Web · App · System</span></nav>
+<div class="hero"><h1>創造數位體驗</h1><p>網頁、App、應用程式，注入品牌靈魂，打造令人難忘的數位體驗。</p><a href="#" class="btn">開始你的專案</a></div>
+<div class="grid">
+<div class="card"><div class="icon">🌐</div><h3>網頁開發</h3><p>企業官網、電商平台、響應式設計</p></div>
+<div class="card"><div class="icon">📱</div><h3>App 開發</h3><p>Flutter 跨平台，iOS / Android</p></div>
+<div class="card"><div class="icon">⚙️</div><h3>應用程式</h3><p>自動化工具、後台系統、API 串接</p></div>
+</div></body></html>`
+  }
+};
+function openPreview(k){
+  var s=STYLES[k]; if(!s) return;
+  document.getElementById('modal-title').textContent=s.title;
+  var f=document.getElementById('preview-iframe');
+  var d=f.contentDocument||f.contentWindow.document;
+  d.open(); d.write(s.html); d.close();
+  document.getElementById('preview-modal').classList.add('open');
+}
+function closePreview(){
+  document.getElementById('preview-modal').classList.remove('open');
+  var f=document.getElementById('preview-iframe');
+  var d=f.contentDocument||f.contentWindow.document;
+  d.open(); d.write(''); d.close();
+}
+document.getElementById('preview-modal').addEventListener('click',function(e){if(e.target===this)closePreview();});
+</script>
+</body>
+</html>
