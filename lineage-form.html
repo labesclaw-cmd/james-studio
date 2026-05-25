@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天堂私服官網｜需求規格表</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft JhengHei',sans-serif;font-size:13px;background:#f5f5f5;color:#222;padding:20px}
+.wrap{max-width:860px;margin:0 auto;background:#fff;padding:30px;border:1px solid #ccc}
+h1{font-size:20px;text-align:center;margin-bottom:4px;color:#1a1a2e}
+.subtitle{text-align:center;color:#666;font-size:12px;margin-bottom:24px}
+h2{font-size:14px;background:#1a1a2e;color:#c89428;padding:7px 12px;margin:20px 0 10px;letter-spacing:.05em}
+h3{font-size:12px;color:#333;margin:10px 0 6px;border-left:3px solid #c89428;padding-left:8px}
+.row{display:flex;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.field{flex:1;min-width:180px}
+label{display:block;font-size:11px;color:#555;margin-bottom:3px}
+input[type=text],input[type=date],textarea,select{width:100%;border:1px solid #ccc;padding:5px 8px;font-size:12px;font-family:inherit;border-radius:3px}
+textarea{resize:vertical;min-height:60px}
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:4px 12px;margin:4px 0 8px}
+.check-grid label{display:flex;align-items:center;gap:6px;font-size:12px;color:#333;cursor:pointer}
+.note{font-size:11px;color:#888;margin:4px 0 8px;line-height:1.6}
+.required{color:#c00}
+.section-note{background:#fffbe6;border-left:3px solid #c89428;padding:6px 10px;font-size:11px;color:#666;margin-bottom:10px}
+table.spec{width:100%;border-collapse:collapse;margin-bottom:8px}
+table.spec th{background:#eee;font-size:11px;padding:5px 8px;border:1px solid #ccc;text-align:left}
+table.spec td{padding:5px 8px;border:1px solid #ccc;font-size:12px}
+table.spec td input[type=text]{border:none;padding:2px 4px;width:100%}
+.page-break{page-break-before:always}
+@media print{body{background:#fff;padding:0}.wrap{border:none;padding:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>天堂私服官網｜開發需求規格表</h1>
+<p class="subtitle">填寫完畢後請回傳給我們，我們將依此進行報價與開發｜版本 v1.0</p>
+
+<!-- A. 客戶基本資料 -->
+<h2>A．客戶基本資料</h2>
+<div class="row">
+  <div class="field"><label>伺服器名稱 <span class="required">*</span></label><input type="text" name="server_name" placeholder="例：七原罪天堂"></div>
+  <div class="field"><label>聯絡人姓名 <span class="required">*</span></label><input type="text" name="contact_name" placeholder="您的稱呼"></div>
+</div>
+<div class="row">
+  <div class="field"><label>LINE ID / 帳號 <span class="required">*</span></label><input type="text" name="line_id" placeholder="@xxxxx"></div>
+  <div class="field"><label>Discord / 其他聯絡方式</label><input type="text" name="discord" placeholder="可留空"></div>
+</div>
+
+<!-- B. 伺服器基本設定 -->
+<h2>B．伺服器基本設定</h2>
+<p class="section-note">以下資訊將顯示於網站首頁伺服器資訊區與 Hero 狀態列，請詳細填寫。</p>
+<table class="spec">
+  <tr><th width="160">項目</th><th>內容（請填寫）</th><th width="220">顯示備註</th></tr>
+  <tr><td>遊戲版本</td><td><input type="text" name="b_game_version" placeholder="例：3.81 經典平衡版"></td><td><input type="text" name="b_game_version_note" placeholder="例：最新穩定版本"></td></tr>
+  <tr><td>經驗倍率</td><td><input type="text" name="b_exp_rate" placeholder="例：20 倍"></td><td><input type="text" name="b_exp_rate_note" placeholder="例：等級提升超有感"></td></tr>
+  <tr><td>金幣掉寶倍率</td><td><input type="text" name="b_drop_rate" placeholder="例：3 倍"></td><td><input type="text" name="b_drop_rate_note" placeholder="例：物寶豐沛好起家"></td></tr>
+  <tr><td>武防強化倍率</td><td><input type="text" name="b_enhance_rate" placeholder="例：1 倍"></td><td><input type="text" name="b_enhance_rate_note" placeholder="例：裝備價值絕對保值"></td></tr>
+  <tr><td>智能內掛</td><td><input type="text" name="b_bot" placeholder="例：24H 全自動"></td><td><input type="text" name="b_bot_note" placeholder="例：上班睡覺都在強"></td></tr>
+  <tr><td>伺服器特色（一句話）</td><td><input type="text" name="b_feature" placeholder="例：GM 親自研發核心，拒絕複製貼上"></td><td></td></tr>
+  <tr><td>開服日期</td><td><input type="text" name="b_open_date" placeholder="例：2025/12/15"></td><td></td></tr>
+  <tr><td>伺服器狀態文字</td><td><input type="text" name="b_status" placeholder="例：運作中 / 維護中"></td><td></td></tr>
+  <tr><td>其他自訂參數①</td><td><input type="text" name="b_custom1_name" placeholder="參數名稱"></td><td><input type="text" name="b_custom1_value" placeholder="數值與說明"></td></tr>
+  <tr><td>其他自訂參數②</td><td><input type="text" name="b_custom2_name" placeholder="參數名稱"></td><td><input type="text" name="b_custom2_value" placeholder="數值與說明"></td></tr>
+</table>
+
+<!-- C. 設計風格 -->
+<h2>C．設計風格偏好</h2>
+<p class="section-note">
+  🎨 不確定要選哪種風格？
+  <a href="https://SAMPLE_SITE_PLACEHOLDER" target="_blank"
+     style="color:#c89428;font-weight:bold;text-decoration:underline">
+    點這裡看風格樣品 →
+  </a>
+  （樣品展示頁即將上線）
+</p>
+
+<h3>主題色系</h3>
+<div class="check-grid">
+  <label><input type="radio" name="theme" value="dark-gold">
+    <span style="display:inline-flex;gap:2px;vertical-align:middle">
+      <span style="width:13px;height:13px;background:#1a1a2e;border-radius:2px;border:1px solid #444"></span>
+      <span style="width:13px;height:13px;background:#c89428;border-radius:2px"></span>
+    </span>
+    黑金暗色（如七原罪，推薦）
+  </label>
+  <label><input type="radio" name="theme" value="dark-blue">
+    <span style="display:inline-flex;gap:2px;vertical-align:middle">
+      <span style="width:13px;height:13px;background:#0a192f;border-radius:2px;border:1px solid #444"></span>
+      <span style="width:13px;height:13px;background:#4fc3f7;border-radius:2px"></span>
+    </span>
+    深藍暗色（科技感）
+  </label>
+  <label><input type="radio" name="theme" value="dark-red">
+    <span style="display:inline-flex;gap:2px;vertical-align:middle">
+      <span style="width:13px;height:13px;background:#1a0000;border-radius:2px;border:1px solid #444"></span>
+      <span style="width:13px;height:13px;background:#c0392b;border-radius:2px"></span>
+    </span>
+    暗紅黑色（熱血風格）
+  </label>
+  <label><input type="radio" name="theme" value="custom">
+    <span style="display:inline-flex;gap:2px;vertical-align:middle">
+      <span style="width:13px;height:13px;background:linear-gradient(135deg,#555,#aaa);border-radius:2px;border:1px solid #444"></span>
+      <span style="width:13px;height:13px;background:linear-gradient(135deg,#aaa,#fff);border-radius:2px;border:1px solid #ccc"></span>
+    </span>
+    自訂色系（請在下方說明）
+  </label>
+</div>
+
+<h3>整體氛圍（可複選）</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="atm_myth"> ⚔️ 神話史詩感 — 宏大、神聖、史詩敘事</label>
+  <label><input type="checkbox" name="atm_battle"> 🔥 熱血戰鬥感 — 緊張、激烈、熱情</label>
+  <label><input type="checkbox" name="atm_steady"> 🏛️ 沉穩大氣感 — 穩重、高端、質感</label>
+  <label><input type="checkbox" name="atm_lively"> 🌟 活潑輕鬆感 — 友善、歡樂、輕快</label>
+  <label><input type="checkbox" name="atm_fantasy"> 🔮 奇幻魔法風 — 神秘、夢幻、魔法</label>
+  <label><input type="checkbox" name="atm_tech"> 🤖 科技未來感 — 電競、數位、冷酷</label>
+</div>
+
+<h3>背景樣式</h3>
+<div class="check-grid">
+  <label><input type="radio" name="bg-style"> 純深色 — 效能最佳，載入最快</label>
+  <label><input type="radio" name="bg-style"> 深色漸層 — 有層次感，效能良好</label>
+  <label><input type="radio" name="bg-style"> 全站背景大圖 — 視覺震撼，需提供圖片素材</label>
+  <label><input type="radio" name="bg-style"> 星空/粒子特效 — 最有氣氛，效能較重</label>
+</div>
+
+<h3>導覽列樣式</h3>
+<div class="check-grid">
+  <label><input type="radio" name="nav-style"> 固定頂部（捲動不消失）</label>
+  <label><input type="radio" name="nav-style"> 捲動後隱藏</label>
+  <label><input type="radio" name="nav-style"> 左側垂直選單</label>
+</div>
+
+<h3>卡片/面板風格</h3>
+<div class="check-grid">
+  <label><input type="radio" name="card-style"> 細框線條（簡潔）</label>
+  <label><input type="radio" name="card-style"> 陰影投影（立體感）</label>
+  <label><input type="radio" name="card-style"> 霓虹發光邊框（遊戲感）</label>
+  <label><input type="radio" name="card-style"> 半透明毛玻璃效果</label>
+</div>
+
+<h3>按鈕風格</h3>
+<div class="check-grid">
+  <label><input type="radio" name="btn-style"> 實心填色（最清楚）</label>
+  <label><input type="radio" name="btn-style"> 線框空心</label>
+  <label><input type="radio" name="btn-style"> 漸層色彩</label>
+  <label><input type="radio" name="btn-style"> 霓虹發光</label>
+</div>
+
+<h3>動畫特效（可複選）</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="anim_hover"> 滑鼠懸停 hover 動態</label>
+  <label><input type="checkbox" name="anim_scroll"> 頁面捲動淡入動畫</label>
+  <label><input type="checkbox" name="anim_particle"> 背景粒子/光點飄動</label>
+  <label><input type="checkbox" name="anim_counter"> 數字滾動計數效果</label>
+  <label><input type="checkbox" name="anim_none"> 不需要特效（效能優先）</label>
+</div>
+
+<h3>圓角偏好</h3>
+<div class="check-grid">
+  <label><input type="radio" name="radius"> 銳利直角（帥氣硬派）</label>
+  <label><input type="radio" name="radius"> 小圓角（適中）</label>
+  <label><input type="radio" name="radius"> 大圓角（現代柔和）</label>
+</div>
+
+<h3>字體偏好</h3>
+<div class="check-grid">
+  <label><input type="radio" name="font"> 黑體/無襯線（現代簡潔）</label>
+  <label><input type="radio" name="font"> 明體/襯線（古典莊重）</label>
+  <label><input type="radio" name="font"> 英文 Cinzel 金屬標題風（如七原罪）</label>
+</div>
+
+<h3>參考網站（可選填）</h3>
+<div class="row">
+  <div class="field"><label>參考網站①</label><input type="text" name="ref_url1" placeholder="https://..."></div>
+  <div class="field"><label>參考網站②</label><input type="text" name="ref_url2" placeholder="https://..."></div>
+</div>
+<div class="field" style="margin-bottom:8px"><label>特別說明（不喜歡什麼、特別想要什麼）</label><textarea name="c_notes" placeholder="例：不要太花俏，要有質感，導覽列要固定在頂部..."></textarea></div>
+
+<!-- D. 網站架構 -->
+<h2>D．網站架構｜導覽頁面選擇</h2>
+<p class="section-note">請勾選需要的頁面。頁面越多，開發時間越長，費用越高。</p>
+<div class="check-grid">
+  <label><input type="checkbox" name="page_home" checked> 首頁（伺服器介紹）</label>
+  <label><input type="checkbox" name="page_news"> 最新公告</label>
+  <label><input type="checkbox" name="page_class"> 職業介紹</label>
+  <label><input type="checkbox" name="page_boss"> BOSS卡資料庫</label>
+  <label><input type="checkbox" name="page_equip"> 裝備/道具資料庫</label>
+  <label><input type="checkbox" name="page_weapon"> 武器資料庫</label>
+  <label><input type="checkbox" name="page_skill"> 技能資料庫</label>
+  <label><input type="checkbox" name="page_guide"> 新手指導教學</label>
+  <label><input type="checkbox" name="page_map_badge"> 地圖徽章資料庫</label>
+  <label><input type="checkbox" name="page_material"> 材料收集資料庫</label>
+  <label><input type="checkbox" name="page_glow"> 炫色資料庫</label>
+  <label><input type="checkbox" name="page_bonus"> 加成資料庫</label>
+  <label><input type="checkbox" name="page_rank"> 排行榜</label>
+  <label><input type="checkbox" name="page_download"> 遊戲下載區</label>
+  <label><input type="checkbox" name="page_community"> 玩家社群連結</label>
+  <label><input type="checkbox" name="page_strategy"> 攻略指南</label>
+</div>
+<div class="field" style="margin-bottom:8px"><label>其他自訂頁面（請說明）</label><input type="text" name="page_custom" placeholder="例：GM 日誌、版本更新記錄..."></div>
+
+<h3>側邊欄功能（桌面版左側面板）</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="sidebar_links" checked> 快速連結（社群、LINE）</label>
+  <label><input type="checkbox" name="sidebar_menu" checked> 快速選單（頁面捷徑）</label>
+  <label><input type="checkbox" name="sidebar_status"> 伺服器狀態即時顯示</label>
+  <label><input type="checkbox" name="sidebar_none"> 不需要側邊欄</label>
+</div>
+
+<!-- E. Hero 區塊 -->
+<h2>E．Hero 首頁大圖區</h2>
+<p class="section-note">Hero 是進入網站第一眼看到的全螢幕大圖區塊，視覺衝擊最強的區域。</p>
+
+<h3>背景圖片</h3>
+<div class="check-grid">
+  <label><input type="radio" name="hero-bg"> 我會提供圖片（請附圖）</label>
+  <label><input type="radio" name="hero-bg"> 開發方素材（另計費用）</label>
+  <label><input type="radio" name="hero-bg"> 使用純色/漸層背景（不需圖片）</label>
+</div>
+
+<h3>Hero 內容元素</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="hero_title" checked> 伺服器名稱（大標題）</label>
+  <label><input type="checkbox" name="hero_subtitle" checked> 英文副標題/口號</label>
+  <label><input type="checkbox" name="hero_slogan" checked> 宣傳標語（一句話）</label>
+  <label><input type="checkbox" name="hero_tags" checked> 標籤文字（特色關鍵字）</label>
+  <label><input type="checkbox" name="hero_cta" checked> CTA 按鈕（加入社群/客服）</label>
+  <label><input type="checkbox" name="hero_status_panel" checked> 伺服器狀態浮動面板</label>
+  <label><input type="checkbox" name="hero_logo"> SVG 裝飾 Logo 圖形</label>
+  <label><input type="checkbox" name="hero_marquee"> 跑馬燈公告條</label>
+</div>
+
+<table class="spec" style="margin-top:8px">
+  <tr><th>欄位</th><th>內容</th></tr>
+  <tr><td>主標題</td><td><input type="text" name="hero_main_title" placeholder="例：七原罪天堂"></td></tr>
+  <tr><td>英文副標</td><td><input type="text" name="hero_sub_title" placeholder="例：Lineage · 一個會進化的全新世界"></td></tr>
+  <tr><td>宣傳標語</td><td><input type="text" name="hero_slogan_text" placeholder="例：「我們不玩快閃，我們只做經典。」"></td></tr>
+  <tr><td>標籤文字</td><td><input type="text" name="hero_tags_text" placeholder="例：長期定居首選 · 農夫也能變王者"></td></tr>
+  <tr><td>按鈕①文字</td><td><input type="text" name="hero_btn1_text" placeholder="例：▶ 加入玩家社群"></td></tr>
+  <tr><td>按鈕①連結</td><td><input type="text" name="hero_btn1_url" placeholder="https://..."></td></tr>
+  <tr><td>按鈕②文字</td><td><input type="text" name="hero_btn2_text" placeholder="例：💬 官方 LINE 客服"></td></tr>
+  <tr><td>按鈕②連結</td><td><input type="text" name="hero_btn2_url" placeholder="https://..."></td></tr>
+</table>
+
+<!-- F. 功能模組 -->
+<h2>F．功能模組規格</h2>
+
+<h3>F-1．公告系統</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f1_need"> 需要（靜態，由我提供內容）</label>
+  <label><input type="checkbox" name="f1_none"> 不需要</label>
+</div>
+<div class="field" style="margin-bottom:8px"><label>預計公告筆數</label><input type="text" name="f1_count" placeholder="例：5~10 筆"></div>
+
+<h3>F-2．職業介紹</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f2_need"> 需要職業卡片</label>
+  <label><input type="checkbox" name="f2_none"> 不需要</label>
+</div>
+<div class="field" style="margin-bottom:6px"><label>職業數量 / 名稱（請列出）</label><textarea name="f2_classes" placeholder="例：君主、騎士、妖精、法師、黑暗妖精、龍騎士、幻術師"></textarea></div>
+
+<h3>F-3．BOSS卡資料庫</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f3_full"> 需要（含圖片卡片 + 篩選功能）</label>
+  <label><input type="checkbox" name="f3_simple"> 需要（純文字列表即可）</label>
+  <label><input type="checkbox" name="f3_none"> 不需要</label>
+</div>
+<div class="row">
+  <div class="field"><label>卡片總數量（預估）</label><input type="text" name="f3_count" placeholder="例：11 張"></div>
+  <div class="field"><label>篩選分類（請列出）</label><input type="text" name="f3_filter" placeholder="例：近戰系、魔法系、遠程系、防禦系"></div>
+</div>
+<p class="note">※ 每張卡需提供：卡片圖片、卡名、英文名、稀有度、特殊能力、基礎屬性加成</p>
+
+<h3>F-4．裝備/武器/道具資料庫</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f4_equipment"> 裝備資料庫（圖示網格樣式）</label>
+  <label><input type="checkbox" name="f4_weapon"> 武器資料庫（表格含進階路線）</label>
+  <label><input type="checkbox" name="f4_item"> 道具資料庫</label>
+  <label><input type="checkbox" name="f4_none"> 不需要</label>
+</div>
+<div class="row">
+  <div class="field"><label>裝備資料筆數（預估）</label><input type="text" name="f4_equip_count" placeholder="例：20 件"></div>
+  <div class="field"><label>武器資料筆數（預估）</label><input type="text" name="f4_weapon_count" placeholder="例：44 件，含進階說明"></div>
+</div>
+
+<h3>F-5．技能資料庫</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f5_need"> 需要（卡片樣式，依職業分色）</label>
+  <label><input type="checkbox" name="f5_none"> 不需要</label>
+</div>
+<div class="field" style="margin-bottom:8px"><label>技能總數 / 職業分類</label><input type="text" name="f5_skills" placeholder="例：幻術師×2、王族×3、妖精×3、騎士×3"></div>
+
+<h3>F-6．新手指導教學</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f6_need"> 需要（圖文步驟說明）</label>
+  <label><input type="checkbox" name="f6_none"> 不需要</label>
+</div>
+
+<h3>F-7．地圖徽章 / 材料收集 / 炫色 / 加成資料庫</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f7_map_badge"> 地圖徽章資料庫</label>
+  <label><input type="checkbox" name="f7_material"> 材料收集資料庫</label>
+  <label><input type="checkbox" name="f7_glow"> 炫色資料庫</label>
+  <label><input type="checkbox" name="f7_bonus"> 加成資料庫</label>
+  <label><input type="checkbox" name="f7_none"> 以上皆不需要</label>
+</div>
+<div class="row" style="margin-top:4px">
+  <div class="field"><label>自訂資料庫①（請輸入名稱）</label><input type="text" name="f7_custom1" placeholder="例：稱號資料庫、寵物資料庫…"></div>
+  <div class="field"><label>自訂資料庫②（請輸入名稱）</label><input type="text" name="f7_custom2" placeholder="可留空"></div>
+</div>
+<p class="note">※ 上述皆為表格樣式，客戶須提供完整資料內容（Excel 或文字皆可）</p>
+
+<h3>F-8．其他功能</h3>
+<div class="check-grid">
+  <label><input type="checkbox" name="f8_rank"> 排行榜頁面</label>
+  <label><input type="checkbox" name="f8_download"> 遊戲下載按鈕（含版本說明）</label>
+  <label><input type="checkbox" name="f8_marquee"> 跑馬燈公告條（頂部滾動文字）</label>
+  <label><input type="checkbox" name="f8_topbar"> 頂部資訊條（伺服器名稱+版本）</label>
+  <label><input type="checkbox" name="f8_rwd"> 手機版響應式設計（RWD）</label>
+</div>
+
+
+<!-- G. 聯絡與社群資訊 -->
+<h2>G．聯絡與社群資訊</h2>
+<p class="section-note">這些連結會出現在 Hero 按鈕、側邊欄、頁尾等多處，請確認填寫正確。</p>
+<table class="spec">
+  <tr><th width="160">平台</th><th>帳號 / 連結</th><th width="180">顯示文字</th></tr>
+  <tr><td>LINE 官方帳號</td><td><input type="text" name="g_line_url" placeholder="@xxxxxxx"></td><td><input type="text" name="g_line_text" placeholder="例：官方 LINE 客服"></td></tr>
+  <tr><td>Discord 伺服器</td><td><input type="text" name="g_discord_url" placeholder="https://discord.gg/..."></td><td><input type="text" name="g_discord_text" placeholder="例：玩家交流社群"></td></tr>
+  <tr><td>Facebook 社團</td><td><input type="text" name="g_fb_url" placeholder="https://fb.com/..."></td><td><input type="text" name="g_fb_text" placeholder="可留空"></td></tr>
+  <tr><td>其他平台①</td><td><input type="text" name="g_other1_url" placeholder="連結或帳號"></td><td><input type="text" name="g_other1_text" placeholder="平台名稱"></td></tr>
+  <tr><td>其他平台②</td><td><input type="text" name="g_other2_url" placeholder="連結或帳號"></td><td><input type="text" name="g_other2_text" placeholder="平台名稱"></td></tr>
+</table>
+
+<h3>跑馬燈滾動文字（可提供 3~5 則）</h3>
+<textarea name="g_marquee" placeholder="例：🚀 開服倒數 3 天！&nbsp;&nbsp;🎁 新手入坑立即領取全套安定裝！&nbsp;&nbsp;⚔ 攻城戰每週開放！"></textarea>
+
+<!-- H. 圖片素材 -->
+<h2>H．圖片素材</h2>
+<h3>Hero 背景圖</h3>
+<div class="check-grid">
+  <label><input type="radio" name="bg-src"> 我會自行提供（JPG/PNG，建議 1920×1080）</label>
+  <label><input type="radio" name="bg-src"> 開發方素材（另計費用）</label>
+</div>
+
+<h3>BOSS卡 / 裝備圖片</h3>
+<div class="check-grid">
+  <label><input type="radio" name="img-src"> 我會提供所有圖片（請打包成資料夾）</label>
+  <label><input type="radio" name="img-src"> 部分提供（沒有的請留空白格）</label>
+  <label><input type="radio" name="img-src"> 全部由開發方代製（需另計費）</label>
+</div>
+<p class="note">※ 建議圖片尺寸：BOSS卡 200×280px，裝備圖示 80×80px，技能圖示 64×64px</p>
+<div class="field" style="margin-bottom:8px"><label>圖片傳送方式</label>
+  <select name="img_transfer">
+    <option>Google 雲端硬碟（分享連結）</option>
+    <option>LINE 傳送（單一壓縮檔）</option>
+    <option>其他方式（請說明）</option>
+  </select>
+</div>
+
+<!-- I. 附加服務選購 -->
+<h2>I．附加服務選購</h2>
+<table class="spec">
+  <tr><th>服務項目</th><th width="200">費用</th><th width="160">繳費方式 / 是否選購</th></tr>
+  <tr>
+    <td>虛擬主機 <span class="required">*</span>（必要）</td>
+    <td>月繳 NT$650／月 &nbsp;|&nbsp; 年繳 NT$6,500／年</td>
+    <td>
+      <select name="host_plan">
+        <option value="monthly">月繳 NT$650／月</option>
+        <option value="yearly">年繳 NT$6,500／年（省 NT$1,300）</option>
+      </select>
+    </td>
+  </tr>
+  <tr><td>Google 搜尋收錄（Search Console）</td><td>NT$500 / 次</td><td style="text-align:center"><input type="checkbox" name="i_google_search"></td></tr>
+  <tr><td>網域 .com（第一年）</td><td>NT$500 ~ 800</td><td style="text-align:center"><input type="checkbox" name="i_domain_com"></td></tr>
+  <tr><td>網域 .tw（第一年）</td><td>NT$1,000 ~ 1,500</td><td style="text-align:center"><input type="checkbox" name="i_domain_tw"></td></tr>
+  <tr><td>網頁文案代寫/潤飾</td><td>NT$2,000 ~ 5,000 / 篇</td><td style="text-align:center"><input type="checkbox" name="i_copywriting"></td></tr>
+</table>
+
+<h3>維護明細價目表</h3>
+<table class="spec">
+  <tr><th>維護類型</th><th>收費標準</th><th>說明與例子</th></tr>
+  <tr>
+    <td><b>微型修改</b><br>單次計件制</td>
+    <td>NT$500 ~ 1,200 / 次</td>
+    <td>只需開啟程式碼，15~30 分鐘內可完成的修改。<br>
+    例：換掉圖片、修改營業時間、增加一個連到官方 LINE 的按鈕。</td>
+  </tr>
+  <tr>
+    <td><b>中型局部翻新</b><br>按區塊計算</td>
+    <td>NT$2,500 ~ 5,000 / 區塊</td>
+    <td>在原本網頁中新增一個全新的版面區塊，需重新設計排版並確保手機版不跑版。<br>
+    例：插入 3 張圖的產品輪播、新增母親節優惠活動專區、新增 FAQ 摺疊選單區塊。</td>
+  </tr>
+  <tr>
+    <td><b>年度代管維護合約</b><br>選項乙</td>
+    <td>NT$3,600 ~ 6,000 / 年</td>
+    <td>含 365 天網站連線監控 + 每月 1~2 次免費微調額度（限改字、換圖，未用完不累積）。超出額度依微型修改標準另計。</td>
+  </tr>
+</table>
+<h3>維護方案偏好</h3>
+<div class="check-grid">
+  <label><input type="radio" name="maintain"> 選項甲：按件計酬（有改才收，無固定月費）</label>
+  <label><input type="radio" name="maintain"> 選項乙：年度代管合約（含免費微調額度）</label>
+  <label><input type="radio" name="maintain"> 尚未決定，待報價後確認</label>
+</div>
+
+<!-- J. 資料提供方式 -->
+<h2>J．資料提供方式</h2>
+<p class="section-note">開發前需由客戶提供所有文字內容與圖片，請確認以下項目的提供方式。</p>
+<table class="spec">
+  <tr><th>資料類型</th><th>提供方式</th><th>備註</th></tr>
+  <tr><td>伺服器參數文字</td>
+    <td><select name="j_server_params"><option>直接填寫本表單</option><option>LINE 傳送</option><option>文字檔/Excel</option></select></td>
+    <td><input type="text" name="j_server_params_note" placeholder=""></td>
+  </tr>
+  <tr><td>公告內容</td>
+    <td><select name="j_news"><option>直接填寫本表單</option><option>LINE 傳送</option><option>文字檔/Excel</option></select></td>
+    <td><input type="text" name="j_news_note" placeholder="預計幾篇"></td>
+  </tr>
+  <tr><td>BOSS卡資料</td>
+    <td><select name="j_boss"><option>Excel/試算表</option><option>LINE 傳送文字</option><option>截圖或圖片說明</option></select></td>
+    <td><input type="text" name="j_boss_note" placeholder="幾筆"></td>
+  </tr>
+  <tr><td>武器/裝備資料</td>
+    <td><select name="j_weapon"><option>Excel/試算表</option><option>LINE 傳送文字</option><option>截圖或圖片說明</option></select></td>
+    <td><input type="text" name="j_weapon_note" placeholder="幾筆"></td>
+  </tr>
+  <tr><td>技能資料</td>
+    <td><select name="j_skill"><option>Excel/試算表</option><option>LINE 傳送文字</option><option>截圖或圖片說明</option></select></td>
+    <td><input type="text" name="j_skill_note" placeholder="幾筆"></td>
+  </tr>
+</table>
+
+<div class="field" style="margin-top:12px">
+  <label>📎 檔案 / 素材分享連結（選「文字檔/Excel」或「雲端圖片」者請填）</label>
+  <input type="text" name="j_file_link" placeholder="請將檔案上傳至 Google Drive 後，貼上分享連結（確認權限為「知道連結的人皆可檢視」）">
+  <p class="note">※ 支援 Google Drive、Dropbox、OneDrive 等任何雲端連結。</p>
+</div>
+
+<div class="note" style="background:#fffbe6;border-left:4px solid #f5a623;padding:10px 14px;margin-top:8px;border-radius:4px">
+  💬 <strong>選擇「LINE 傳送」者：</strong>表單送出後，請加入我們的官方 LINE 帳號
+  <strong>@LINEBOT_PLACEHOLDER</strong>，並告知您的伺服器名稱，客服將主動與您收取資料。
+</div>
+
+<!-- K. 時程與備註 -->
+<h2>K．時程確認與其他備註</h2>
+<div class="row">
+  <div class="field"><label>最快可提供所有素材的日期</label><input type="date" name="k_material_date"></div>
+  <div class="field"><label>網站上線期望日期</label><input type="date" name="k_launch_date"></div>
+</div>
+<div class="field" style="margin-bottom:8px"><label>特殊需求或補充說明</label><textarea rows="4" name="k_notes" placeholder="任何未在表單中涵蓋的需求、特別叮嚀、或您希望我們知道的事情..."></textarea></div>
+<div class="field"><label>您是從哪裡找到我們的？</label>
+  <select name="k_source">
+    <option>-- 請選擇 --</option>
+    <option>天堂相關社群/Discord</option>
+    <option>LINE 群組推薦</option>
+    <option>Google 搜尋</option>
+    <option>朋友介紹</option>
+    <option>其他</option>
+  </select>
+</div>
+
+<div style="margin-top:24px;padding:12px;background:#f9f9f9;border:1px solid #ddd;font-size:11px;color:#666;line-height:1.8">
+  <b>填寫說明：</b><br>
+  1. 填寫完畢後，點擊下方「送出需求規格表」按鈕即可完成提交。<br>
+  2. 圖片素材請另行打包後透過雲端硬碟或 LINE 傳送。<br>
+  3. 收到規格表後，我們將在 1~2 個工作天內提供正式報價單。<br>
+  4. 標示 <span class="required">*</span> 為必填欄位，其餘可於確認後補充。
+</div>
+
+<div style="margin-top:20px;text-align:center">
+  <button type="button" onclick="submitSpec()" id="submit-btn"
+    style="background:#c89428;color:#1a1a2e;border:none;padding:12px 40px;font-size:15px;font-weight:bold;border-radius:4px;cursor:pointer;letter-spacing:.05em">
+    送出需求規格表
+  </button>
+  <div id="submit-status" style="margin-top:12px;font-size:13px;display:none"></div>
+</div>
+
+</div><!-- end wrap -->
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzslTIMvgXJs7gHKDS4YP76cySUyOv7mSsThVyp5289QMqXoo3SfbDjuaA0HW3vLajy/exec';
+
+function submitSpec() {
+  const required = ['server_name','contact_name','line_id'];
+  const labels = {server_name:'伺服器名稱',contact_name:'聯絡人姓名',line_id:'LINE ID'};
+  for (const r of required) {
+    const el = document.querySelector('[name="'+r+'"]');
+    if (!el || !el.value.trim()) { alert('請填寫必填欄位：' + labels[r]); el && el.focus(); return; }
+  }
+
+  const data = { submitted_at: new Date().toLocaleString('zh-TW'), form_type: 'lineage' };
+  document.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+    if (el.type === 'checkbox') { data[el.name] = el.checked ? '是' : '否'; }
+    else if (el.type === 'radio') { if (el.checked) data[el.name] = el.value || el.parentElement.textContent.trim(); }
+    else { data[el.name] = el.value; }
+  });
+
+  const btn = document.getElementById('submit-btn');
+  const status = document.getElementById('submit-status');
+  btn.disabled = true; btn.textContent = '傳送中…';
+  status.style.display = 'block'; status.style.color = '#666';
+  status.textContent = '資料傳送中，請稍候…';
+
+  fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
+    .then(r => r.json())
+    .then(res => {
+      if (res.result === 'success') {
+        status.style.color = '#2a7a2a';
+        status.textContent = '✅ 規格表已成功送出！我們將在 1~2 個工作天內與您聯繫。';
+        btn.textContent = '已送出';
+      } else { throw new Error(res.error || 'unknown'); }
+    })
+    .catch(err => {
+      status.style.color = '#c00';
+      status.textContent = '❌ 送出失敗，請截圖此表單以 LINE 傳送給我們。錯誤：' + err.message;
+      btn.disabled = false; btn.textContent = '重新送出';
+    });
+}
+</script>
+</body>
+</html>
